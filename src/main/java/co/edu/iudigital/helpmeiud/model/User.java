@@ -42,7 +42,7 @@ public class User implements Serializable{
     @Column(name = "image", nullable = true)
     private String image;
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "roles_users", 
     			joinColumns = {@JoinColumn(name = "user_id")}, 
     			inverseJoinColumns = {@JoinColumn(name = "role_id")}

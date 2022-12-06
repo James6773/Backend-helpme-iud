@@ -1,6 +1,7 @@
 package co.edu.iudigital.helpmeiud.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,9 @@ public class CrimeServiceImpl implements ICrimeService{
 		this.crimeRepository = crimeRepository;
 	}
 	
-	@Transactional(readOnly = true)
+	
 	@Override
+	@Transactional(readOnly = true)
 	public List<CrimeDTO> findAll() {
 		
 		List<Crime> crimes = crimeRepository.findAll();
@@ -39,11 +41,17 @@ public class CrimeServiceImpl implements ICrimeService{
 	}
 
 	@Override
-	public CrimeDTO findById(Long id) {
-		return null;
+	@Transactional
+	public Crime findById(Long id) {
+		
+		Optional<Crime> crime = crimeRepository.findById(id);
+		
+		return crime.get();
+		
 	}
 
 	@Override
+	@Transactional
 	public CrimeDTO save(CrimeDTO crimeDTO) {
 		
 		Crime crime = new Crime();
@@ -58,12 +66,32 @@ public class CrimeServiceImpl implements ICrimeService{
 	}
 	
 	@Override
-	public CrimeDTO update(CrimeDTO crimeDTO, Long id) {
-		return null;
+	@Transactional
+	public CrimeDTO update(Long id, CrimeDTO crimeDTO) {
+		
+		Optional<Crime> crimeOptional = crimeRepository.findById(id);
+		
+		Crime crime = crimeOptional.get();
+		
+		crime.setName(crimeDTO.getName());
+		crime.setDescription(crimeDTO.getDescription());
+		crime.setUser(crimeDTO.getUser());
+		
+		crimeRepository.save(crime); 
+		
+		return crimeDTO;
 	}
 
 	@Override
-	public CrimeDTO delete(Long id) {
+	@Transactional
+	public Crime delete(Long id) {
+		
+		Optional<Crime> crimeOptional = crimeRepository.findById(id);
+		
+		Crime crime = crimeOptional.get();
+		
+		crimeRepository.delete(crime); 
+		
 		return null;
 	}
 	

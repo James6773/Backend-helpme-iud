@@ -1,6 +1,7 @@
 package co.edu.iudigital.helpmeiud.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class UserServiceImpl implements IUserService {
 		this.userRepository = userRepository;
 	}
 	
-	@Transactional(readOnly = true)
 	@Override
+	@Transactional(readOnly = true)
 	public List<UserDTO> findAll() {
 		
 		List<User> users = userRepository.findAll();
@@ -45,12 +46,16 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UserDTO findById(Long id) {
+	@Transactional
+	public User findById(Long id) {
 		
-		return null;
+		Optional<User> user = userRepository.findById(id);
+		
+		return user.get();
 	}
 
 	@Override
+	@Transactional
 	public UserDTO save(UserDTO userDTO) {
 		
 		User user = new User();
@@ -71,13 +76,37 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UserDTO update(UserDTO userDTO, Long id) {
+	@Transactional
+	public UserDTO update(Long id, UserDTO userDTO) {
 		
-		return null;
+		Optional<User> userOptional = userRepository.findById(id);
+		
+		User user = userOptional.get();
+		
+		user.setUsername(userDTO.getUsername());
+		user.setName(userDTO.getName());
+		user.setLastName(userDTO.getLastName());
+		user.setPassword(userDTO.getPassword());
+		user.setBirthDate(userDTO.getBirthDate());
+		user.setEnabled(userDTO.getEnabled());
+		user.setSocialNetwork(userDTO.getSocialNetwork());
+		user.setImage(userDTO.getImage());
+		user.setRoles(userDTO.getRoles());
+		
+		userRepository.save(user);
+		
+		return userDTO;
 	}
 
 	@Override
-	public UserDTO delete(Long id) {
+	@Transactional
+	public User delete(Long id) {
+		
+		Optional<User> userOptional = userRepository.findById(id);
+		
+		User user = userOptional.get();
+		
+		userRepository.delete(user); 
 		
 		return null;
 	}

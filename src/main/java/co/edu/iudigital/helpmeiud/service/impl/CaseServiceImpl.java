@@ -1,6 +1,7 @@
 package co.edu.iudigital.helpmeiud.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.iudigital.helpmeiud.dto.CaseDTO;
 import co.edu.iudigital.helpmeiud.model.Case;
-import co.edu.iudigital.helpmeiud.model.User;
 import co.edu.iudigital.helpmeiud.repository.ICaseRepository;
 import co.edu.iudigital.helpmeiud.service.iface.ICaseService;
 
@@ -23,8 +23,8 @@ public class CaseServiceImpl implements ICaseService {
 		this.caseRepository = caseRepository;
 	}
 	
-	@Transactional(readOnly = true)
 	@Override
+	@Transactional(readOnly = true)
 	public List<CaseDTO> findAll() {
 		
 		List<Case> cases = caseRepository.findAll();
@@ -47,12 +47,16 @@ public class CaseServiceImpl implements ICaseService {
 	}
 
 	@Override
-	public CaseDTO findById(Long id) {
+	@Transactional
+	public Case findById(Long id) {
 		
-		return null;
+		Optional<Case> cases = caseRepository.findById(id);
+		
+		return cases.get();
 	}
 
 	@Override
+	@Transactional
 	public CaseDTO save(CaseDTO caseDTO) {
 		
 		Case cases = new Case();
@@ -74,13 +78,30 @@ public class CaseServiceImpl implements ICaseService {
 	}
 
 	@Override
-	public CaseDTO update(CaseDTO caseDTO, Long id) {
+	@Transactional
+	public CaseDTO update(Long id, CaseDTO caseDTO) {
 		
-		return null;
+		Optional<Case> caseOptional = caseRepository.findById(id);
+		
+		Case cases = caseOptional.get();
+		
+		cases.setVisible(caseDTO.getVisible());
+		cases.setDescription(caseDTO.getDescription());
+		
+		caseRepository.save(cases);
+		
+		return caseDTO;
 	}
 
 	@Override
-	public CaseDTO delete(Long id) {
+	@Transactional
+	public Case delete(Long id) {
+		
+		Optional<Case> caseOptional = caseRepository.findById(id);
+		
+		Case cases = caseOptional.get();
+		
+		caseRepository.delete(cases); 
 		
 		return null;
 	}	
