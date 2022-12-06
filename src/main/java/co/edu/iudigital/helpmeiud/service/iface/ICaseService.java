@@ -14,6 +14,6 @@ public interface ICaseService {
 	
 	public Boolean visible(Boolean visible, Long id);
 	
-	public void delete(Long id);
+	public CaseDTO delete(Long id);
 	
 }

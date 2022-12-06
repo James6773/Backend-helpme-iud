@@ -14,7 +14,7 @@ public interface IUserService {
 	
 	public UserDTO save(UserDTO userDTO);
 	
-	public UserDTO update(UserDTO userDTO);
+	public UserDTO update(UserDTO userDTO, Long id);
 	
-	public void delete(Long id);
+	public UserDTO delete(Long id);
 }

@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.iudigital.helpmeiud.dto.CrimeDTO;
 import co.edu.iudigital.helpmeiud.dto.UserDTO;
 import co.edu.iudigital.helpmeiud.service.iface.IUserService;
 
@@ -18,11 +22,64 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 	
-	@GetMapping
-	public ResponseEntity<List<UserDTO>> index() {
+	@GetMapping(path = "/get")
+	public ResponseEntity<List<UserDTO>> findAll() {
 		return ResponseEntity
 				.ok()
 				.body(userService.findAll());
 	}
-
+	
+	@GetMapping(path = "/getById/{id}")
+	public ResponseEntity<UserDTO> findById(Long id) {
+		try {
+			
+		} catch (Exception e) {
+			System.out.println("Error: "+e);	
+		}
+		
+		return ResponseEntity
+				.ok()
+				.body(userService.findById(id));
+	}
+	
+	@PostMapping(path = "/post")
+	public ResponseEntity<UserDTO> save(UserDTO userDTO) {
+		try {
+			
+		} catch (Exception e) {
+			System.out.println("Error: "+e);	
+		}
+		
+		return ResponseEntity
+				.ok()
+				.body(userService.save(userDTO));
+	}
+	
+	@PutMapping(path = "/put/{id}")
+	public ResponseEntity<UserDTO> update(UserDTO userDTO, Long id) {
+		try {
+			
+		} catch (Exception e) {
+			System.out.println("Error: "+e);	
+		}
+		
+		return ResponseEntity
+				.ok()
+				.body(userService.update(userDTO, id));
+	}
+	
+	@DeleteMapping(path = "/delete/{id}")
+	public ResponseEntity<UserDTO> delete(Long id) {
+		try {
+			
+		} catch (Exception e) {
+			System.out.println("Error: "+e);	
+		}
+		
+		return ResponseEntity
+				.ok()
+				.body(userService.delete(id));
+	}
 }
+
+

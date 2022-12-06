@@ -36,10 +36,10 @@ public class User implements Serializable{
     @Column(name = "enabled", nullable = false)
     private Boolean enabled;
     
-    @Column(name = "social_network", nullable = false)
+    @Column(name = "social_network", nullable = true)
     private Boolean socialNetwork;
     
-    @Column(name = "image", nullable = false)
+    @Column(name = "image", nullable = true)
     private String image;
     
     @ManyToMany(fetch = FetchType.LAZY)

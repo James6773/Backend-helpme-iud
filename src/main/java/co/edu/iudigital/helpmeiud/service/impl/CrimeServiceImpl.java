@@ -33,6 +33,7 @@ public class CrimeServiceImpl implements ICrimeService{
 				.id(c.getId())
 				.name(c.getName())
 				.description(c.getDescription())
+				.user(c.getUser())
 				.build()		
 		).collect(Collectors.toList()); 
 	}
@@ -44,15 +45,26 @@ public class CrimeServiceImpl implements ICrimeService{
 
 	@Override
 	public CrimeDTO save(CrimeDTO crimeDTO) {
-		return null;
+		
+		Crime crime = new Crime();
+		
+		crime.setName(crimeDTO.getName());
+		crime.setDescription(crimeDTO.getDescription());
+		crime.setUser(crimeDTO.getUser());
+		
+		crimeRepository.save(crime);
+		
+		return crimeDTO;
 	}
 	
 	@Override
-	public CrimeDTO update(CrimeDTO crimeDTO) {
+	public CrimeDTO update(CrimeDTO crimeDTO, Long id) {
 		return null;
 	}
 
 	@Override
-	public void delete(Long id) {
+	public CrimeDTO delete(Long id) {
+		return null;
 	}
+	
 }

@@ -12,8 +12,8 @@ public interface ICrimeService {
 	
 	public CrimeDTO save(CrimeDTO crimeDTO);
 	
-	public CrimeDTO update(CrimeDTO crimeDTO);
+	public CrimeDTO update(CrimeDTO crimeDTO, Long id);
 	
-	public void delete(Long id);
+	public CrimeDTO delete(Long id);
 
 }

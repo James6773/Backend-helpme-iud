@@ -64,7 +64,8 @@ public class CaseServiceImpl implements ICaseService {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public CaseDTO delete(Long id) {
 		
+		return null;
 	}	
 }

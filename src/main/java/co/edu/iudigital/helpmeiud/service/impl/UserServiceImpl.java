@@ -63,13 +63,14 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UserDTO update(UserDTO userDTO) {
+	public UserDTO update(UserDTO userDTO, Long id) {
 		
 		return null;
 	}
 
 	@Override
-	public void delete(Long id) {
+	public UserDTO delete(Long id) {
 		
+		return null;
 	}
 }
