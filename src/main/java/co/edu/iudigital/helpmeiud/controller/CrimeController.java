@@ -3,11 +3,13 @@ package co.edu.iudigital.helpmeiud.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,8 +50,8 @@ public class CrimeController {
 				.body(crimeService.findById(id));
 	}
 	
-	@PostMapping(path = "/post")
-	public ResponseEntity<CrimeDTO> save(CrimeDTO crimeDTO) {
+	@PostMapping(path = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CrimeDTO> save(@RequestBody CrimeDTO crimeDTO) {
 		try {
 			
 		} catch (Exception e) {
@@ -61,8 +63,8 @@ public class CrimeController {
 				.body(crimeService.save(crimeDTO));
 	}
 	
-	@PutMapping(path = "/put/{id}")
-	public ResponseEntity<CrimeDTO> update(CrimeDTO crimeDTO, Long id) {
+	@PutMapping(path = "/put/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CrimeDTO> update(@RequestBody CrimeDTO crimeDTO, Long id) {
 		try {
 			
 		} catch (Exception e) {

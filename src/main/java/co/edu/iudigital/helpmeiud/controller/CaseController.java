@@ -3,16 +3,17 @@ package co.edu.iudigital.helpmeiud.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.iudigital.helpmeiud.dto.CaseDTO;
-import co.edu.iudigital.helpmeiud.dto.CrimeDTO;
 import co.edu.iudigital.helpmeiud.service.iface.ICaseService;
 
 
@@ -23,7 +24,7 @@ public class CaseController {
 	@Autowired
 	private ICaseService caseService;
 	
-	@GetMapping
+	@GetMapping(path = "/get")
 	public ResponseEntity<List<CaseDTO>> findAll() {
 		return ResponseEntity
 				.ok()
@@ -43,8 +44,8 @@ public class CaseController {
 				.body(caseService.findById(id));
 	}
 	
-	@PostMapping(path = "/post")
-	public ResponseEntity<CaseDTO> save(CaseDTO caseDTO) {
+	@PostMapping(path = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CaseDTO> save(@RequestBody CaseDTO caseDTO) {
 		try {
 			
 		} catch (Exception e) {
@@ -56,8 +57,8 @@ public class CaseController {
 				.body(caseService.save(caseDTO));
 	}
 	
-	@PutMapping(path = "/put/{id}")
-	public ResponseEntity<Boolean> visible(Boolean visible, Long id) {
+	@PutMapping(path = "/put/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CaseDTO> update(@RequestBody CaseDTO caseDTO, Long id) {
 		try {
 			
 		} catch (Exception e) {
@@ -66,7 +67,7 @@ public class CaseController {
 		
 		return ResponseEntity
 				.ok()
-				.body(caseService.visible(visible, id));
+				.body(caseService.update(caseDTO, id));
 	}
 	
 	@DeleteMapping(path = "/delete/{id}")

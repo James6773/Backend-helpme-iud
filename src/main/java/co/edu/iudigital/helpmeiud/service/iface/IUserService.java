@@ -10,8 +10,6 @@ public interface IUserService {
 	
 	public UserDTO findById(Long id);
 	
-	public UserDTO findByUserName(String userName);
-	
 	public UserDTO save(UserDTO userDTO);
 	
 	public UserDTO update(UserDTO userDTO, Long id);

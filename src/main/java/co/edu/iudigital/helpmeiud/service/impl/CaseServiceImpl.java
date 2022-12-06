@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.iudigital.helpmeiud.dto.CaseDTO;
 import co.edu.iudigital.helpmeiud.model.Case;
+import co.edu.iudigital.helpmeiud.model.User;
 import co.edu.iudigital.helpmeiud.repository.ICaseRepository;
 import co.edu.iudigital.helpmeiud.service.iface.ICaseService;
 
@@ -54,11 +55,26 @@ public class CaseServiceImpl implements ICaseService {
 	@Override
 	public CaseDTO save(CaseDTO caseDTO) {
 		
-		return null;
+		Case cases = new Case();
+		
+		cases.setDateTime(caseDTO.getDateTime());
+		cases.setLatitude(caseDTO.getLatitude());
+		cases.setLongitude(caseDTO.getLongitude());
+		cases.setAltitude(caseDTO.getAltitude());
+		cases.setVisible(caseDTO.getVisible());
+		cases.setDescription(caseDTO.getDescription());
+		cases.setMapUrl(caseDTO.getMapUrl());
+		cases.setRmiUrl(caseDTO.getRmiUrl());
+		cases.setCrime(caseDTO.getCrime());
+		cases.setUser(caseDTO.getUser());
+		
+		caseRepository.save(cases);
+		
+		return caseDTO;
 	}
 
 	@Override
-	public Boolean visible(Boolean visible, Long id) {
+	public CaseDTO update(CaseDTO caseDTO, Long id) {
 		
 		return null;
 	}

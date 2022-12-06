@@ -12,7 +12,7 @@ public interface ICaseService {
 	
 	public CaseDTO save(CaseDTO caseDTO);
 	
-	public Boolean visible(Boolean visible, Long id);
+	public CaseDTO update(CaseDTO caseDTO, Long id);
 	
 	public CaseDTO delete(Long id);
 	

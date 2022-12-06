@@ -22,7 +22,7 @@ public class Crime implements Serializable{
     @Column(name = "description", length = 250, nullable = true)
     private String description;
     
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "user_id")
     private User user;
 }

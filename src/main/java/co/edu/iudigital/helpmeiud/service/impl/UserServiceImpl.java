@@ -51,15 +51,23 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UserDTO findByUserName(String userName) {
-		
-		return null;
-	}
-
-	@Override
 	public UserDTO save(UserDTO userDTO) {
 		
-		return null;
+		User user = new User();
+		
+		user.setUsername(userDTO.getUsername());
+		user.setName(userDTO.getName());
+		user.setLastName(userDTO.getLastName());
+		user.setPassword(userDTO.getPassword());
+		user.setBirthDate(userDTO.getBirthDate());
+		user.setEnabled(userDTO.getEnabled());
+		user.setSocialNetwork(userDTO.getSocialNetwork());
+		user.setImage(userDTO.getImage());
+		user.setRoles(userDTO.getRoles());
+		
+		userRepository.save(user);
+		
+		return userDTO;
 	}
 
 	@Override
